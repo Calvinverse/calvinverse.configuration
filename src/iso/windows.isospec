@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<iso>
+    <name>windows-init</name>
+    <files>
+        <file src="${DirSrc}\iso\windows\*.*" target="" />
+    </files>
+</iso>
