@@ -1,0 +1,6 @@
+packages/
+build/bin/
+build/configurations/
+build/deploy/
+build/logs/
+build/temp/
