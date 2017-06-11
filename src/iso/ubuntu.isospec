@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<iso>
+    <name>ubuntu-init</name>
+    <files>
+        <file src="${DirSrc}\iso\ubuntu\*.*" target="" />
+    </files>
+</iso>
