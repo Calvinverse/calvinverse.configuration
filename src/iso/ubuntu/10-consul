@@ -1,0 +1,3 @@
+# dnsmasq server configuration for pointing any queries to the 'consulverse' TLD to 127.0.0.1:8600, which should be
+# the port consul is listening on for DNS queries
+server=/consulverse/127.0.0.1#8600
