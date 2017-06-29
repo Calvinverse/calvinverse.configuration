@@ -3,5 +3,6 @@
     <name>windows-init</name>
     <files>
         <file src="${DirSrc}\iso\windows\*.*" target="" />
+        <file src="${DirSrc}\iso\windows\unbound\*.*" target="unbound" />
     </files>
 </iso>
