@@ -3,5 +3,15 @@
     <name>ubuntu-init</name>
     <files>
         <file src="${DirSrc}\iso\ubuntu\*.*" target="" />
+
+        <file src="${DirSrc}\iso\shared\consul\*.*" target="consul" />
+        <file src="${DirSrc}\iso\shared\consul\client\*.*" target="consul\client" />
+        <file src="${DirSrc}\iso\shared\consul\server\*.*" target="consul\server" />
+
+        <file src="${DirSrc}\iso\shared\nomad\*.*" target="nomad" />
+        <file src="${DirSrc}\iso\shared\nomad\client\*.*" target="nomad\client" />
+        <file src="${DirSrc}\iso\shared\nomad\server\*.*" target="nomad\server" />
+
+        <file src="${DirSrc}\iso\shared\unbound\*.*" target="unbound" />
     </files>
 </iso>

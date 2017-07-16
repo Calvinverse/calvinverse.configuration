@@ -1,5 +1,0 @@
-{
-  "datacenter": "calvinverse-test",
-  "domain": "consulverse",
-  "retry_join": ["192.168.3.25"]
-}
