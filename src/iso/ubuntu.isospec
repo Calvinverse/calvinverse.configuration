@@ -13,5 +13,7 @@
         <file src="${DirSrc}\iso\shared\nomad\server\*.*" target="nomad\server" />
 
         <file src="${DirSrc}\iso\shared\unbound\*.*" target="unbound" />
+
+        <file src="${DirSrc}\iso\shared\vault\*.*" target="vault" />
     </files>
 </iso>
