@@ -78,13 +78,11 @@
         Files that should be copied, either from the file system or from a NuGet package.
     -->
     <ItemGroup Condition=" '$(ShouldLoadFilesToCopy)' == 'true' ">
-        <!--
         <FilesToCopy
-            Exclude="$(DirSrcCookbooks)\**\metadata.rb"
-            Include="$(DirSrcCookbooks)\**\*.*">
-            <Destination>$(DirBuildTempCookbooks)</Destination>
+            Exclude="$(DirSrc)\iso\shared\consul\client\consul_client_location.json;$(DirSrc)\iso\shared\consul\server\consul_server_location.json"
+            Include="$(DirSrc)\iso\**\*.*">
+            <Destination>$(DirBuildTempIso)</Destination>
         </FilesToCopy>
-        -->
     </ItemGroup>
     <ItemGroup Condition=" '$(ShouldLoadNuGetFilesToCopy)' == 'true' ">
         <!--
@@ -140,16 +138,14 @@
         Additional parameters can be provided through the 'TemplateTokens' ItemGroup below.
     -->
     <ItemGroup Condition=" '$(ShouldLoadBuildFilesToGenerate)' == 'true' ">
-        <!--
-        <BuildFilesToGenerate Include="$(DirBuildTempCookbooks)\resource_container_host_linux\metadata.rb">
-            <Template>$(DirSrcCookbooks)\resource_container_host_linux\metadata.rb</Template>
+        <BuildFilesToGenerate Include="$(DirBuildTempIso)\shared\consul\client\consul_client_location.json">
+            <Template>$(DirSrc)\iso\shared\consul\client\consul_client_location.json</Template>
             <Encoding></Encoding>
         </BuildFilesToGenerate>
-        <BuildFilesToGenerate Include="$(DirBuildTemp)\ubuntu_1604\packer_variables.json">
-            <Template>$(DirSrcPacker)\ubuntu_1604\packer_variables.json</Template>
+        <BuildFilesToGenerate Include="$(DirBuildTempIso)\shared\consul\server\consul_server_location.json">
+            <Template>$(DirSrc)\iso\shared\consul\server\consul_server_location.json</Template>
             <Encoding></Encoding>
         </BuildFilesToGenerate>
-        -->
     </ItemGroup>
 
 
