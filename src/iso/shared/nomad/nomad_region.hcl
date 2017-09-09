@@ -1,2 +1,2 @@
-datacenter = "calvinverse-test"
+datacenter = "calvinverse-01"
 region = "calvinverse"

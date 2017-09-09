@@ -1,4 +1,4 @@
 server {
-    bootstrap_expect = 2
+    bootstrap_expect = 1
     encrypt = "igbDJbUBoDff9ujwlwJNGg=="
 }
