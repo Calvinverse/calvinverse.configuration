@@ -79,7 +79,6 @@
     -->
     <ItemGroup Condition=" '$(ShouldLoadFilesToCopy)' == 'true' ">
         <FilesToCopy
-            Exclude="$(DirSrc)\iso\shared\consul\client\consul_client_location.json;$(DirSrc)\iso\shared\consul\server\consul_server_location.json"
             Include="$(DirSrc)\iso\**\*.*">
             <Destination>$(DirBuildTempIso)</Destination>
         </FilesToCopy>
@@ -138,6 +137,7 @@
         Additional parameters can be provided through the 'TemplateTokens' ItemGroup below.
     -->
     <ItemGroup Condition=" '$(ShouldLoadBuildFilesToGenerate)' == 'true' ">
+        <!--
         <BuildFilesToGenerate Include="$(DirBuildTempIso)\shared\consul\client\consul_client_location.json">
             <Template>$(DirSrc)\iso\shared\consul\client\consul_client_location.json</Template>
             <Encoding></Encoding>
@@ -146,6 +146,7 @@
             <Template>$(DirSrc)\iso\shared\consul\server\consul_server_location.json</Template>
             <Encoding></Encoding>
         </BuildFilesToGenerate>
+        -->
     </ItemGroup>
 
 
