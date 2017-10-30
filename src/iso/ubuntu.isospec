@@ -10,6 +10,8 @@
 
         <file src="${DirTemp}\iso\shared\fabio\*.*" target="fabio" />
 
+        <file src="${DirTemp}\iso\shared\nexus\*.*" target="nexus" />
+
         <file src="${DirTemp}\iso\shared\nomad\*.*" target="nomad" />
         <file src="${DirTemp}\iso\shared\nomad\server\*.*" target="nomad\server" />
 
