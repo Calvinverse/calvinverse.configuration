@@ -8,6 +8,8 @@
         <file src="${DirTemp}\iso\shared\consul\client\*.*" target="consul\client" />
         <file src="${DirTemp}\iso\shared\consul\server\*.*" target="consul\server" />
 
+        <file src="${DirTemp}\iso\shared\docker\*.*" target="docker" />
+
         <file src="${DirTemp}\iso\shared\fabio\*.*" target="fabio" />
 
         <file src="${DirTemp}\iso\shared\nexus\*.*" target="nexus" />
