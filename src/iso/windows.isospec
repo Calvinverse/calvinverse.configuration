@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <iso>
-    <name>windows-init</name>
+    <name>windows-init-${VersionSemantic}</name>
     <files>
         <file src="${DirTemp}\iso\windows\*.*" target="" />
 

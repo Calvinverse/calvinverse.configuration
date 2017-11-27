@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <iso>
-    <name>ubuntu-init</name>
+    <name>ubuntu-init-${VersionSemantic}</name>
     <files>
         <file src="${DirTemp}\iso\ubuntu\*.*" target="" />
 
