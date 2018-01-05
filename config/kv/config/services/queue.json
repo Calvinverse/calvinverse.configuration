@@ -1,0 +1,10 @@
+{
+    "logs" : {
+        "syslog" : {
+            "username": "",
+            "vhost": ""
+        }
+    },
+    "host" : "active.queue",
+    "port" : 5672
+}
