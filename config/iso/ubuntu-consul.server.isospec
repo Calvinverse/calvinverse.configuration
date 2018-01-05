@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <iso>
-    <name>ubuntu-init-${VersionSemantic}</name>
+    <name>ubuntu-consul.server-${VersionSemantic}</name>
     <files>
         <file src="${DirTemp}\iso\ubuntu\*.*" target="" />
 
         <file src="${DirTemp}\iso\shared\consul\*.*" target="consul" />
-        <file src="${DirTemp}\iso\shared\consul\client\*.*" target="consul\client" />
         <file src="${DirTemp}\iso\shared\consul\server\*.*" target="consul\server" />
+
+        <file src="${DirTemp}\iso\shared\consul-template\*.*" target="consul-template" />
 
         <file src="${DirTemp}\iso\shared\docker\*.*" target="docker" />
 
