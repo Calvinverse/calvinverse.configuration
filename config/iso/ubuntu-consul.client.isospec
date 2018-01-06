@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<iso>
+    <name>ubuntu-consul.client-${VersionSemantic}</name>
+    <files>
+        <file src="${DirTemp}\iso\ubuntu\*.*" target="" />
+
+        <file src="${DirTemp}\iso\shared\consul\*.*" target="consul" />
+        <file src="${DirTemp}\iso\shared\consul\client\*.*" target="consul\client" />
+
+        <file src="${DirTemp}\iso\shared\consul-template\*.*" target="consul-template" />
+
+        <file src="${DirTemp}\iso\shared\docker\*.*" target="docker" />
+
+        <file src="${DirTemp}\iso\shared\fabio\*.*" target="fabio" />
+
+        <file src="${DirTemp}\iso\shared\nexus\*.*" target="nexus" />
+
+        <file src="${DirTemp}\iso\shared\nomad\*.*" target="nomad" />
+        <file src="${DirTemp}\iso\shared\nomad\server\*.*" target="nomad\server" />
+
+        <file src="${DirTemp}\iso\shared\unbound\*.*" target="unbound" />
+
+        <file src="${DirTemp}\iso\shared\vault\*.*" target="vault" />
+    </files>
+</iso>

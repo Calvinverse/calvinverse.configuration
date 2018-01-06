@@ -127,7 +127,7 @@
         <IsoPackageSpecs
             Condition=" '$(DirWorkspace)' != '' "
             Exclude="$(DirBuild)\**\*.isospec"
-            Include="$(DirSrc)\**\*.isospec" />
+            Include="$(DirConfig)\**\*.isospec" />
     </ItemGroup>
 
 
