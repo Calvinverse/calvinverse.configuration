@@ -179,6 +179,8 @@
         <!-- The directory that will contain all the test files generated during the test process -->
         <!-- <DirBuildTest>$(DirBuild)\tests</DirBuildTest> -->
 
+        <DirConfig>$(DirWorkspace)\config</DirConfig>
+
         <!-- The directory that contains all the NuGet packages for the project -->
         <!-- <DirPackages>$(DirWorkspace)\packages</DirPackages> -->
 
@@ -506,9 +508,6 @@
             Each script should have a task with the same name as the file.
         -->
         <!-- <TemplateTokenGenerators>UNDEFINED</TemplateTokenGenerators> -->
-    </PropertyGroup>
-    <PropertyGroup>
-        <LinuxImage Condition=" '$(LinuxImage)' == '' ">resource.container.host.linux-ubuntu1604</LinuxImage>
     </PropertyGroup>
 
     <!--

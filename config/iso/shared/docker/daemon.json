@@ -1,0 +1,14 @@
+{
+    "experimental": true,
+    "graph": "/srv/containers/docker",
+    "insecure-registries": [
+        "read-production-docker.artefacts.service.consulverse:5000",
+        "read-qa-docker.artefacts.service.consulverse:5010",
+        "read-mirror-docker.artefacts.service.consulverse:5020",
+        "write-production-docker.artefacts.service.consulverse:5000",
+        "write-qa-docker.artefacts.service.consulverse:5010"
+    ],
+    "registry-mirrors" : [
+        "read-mirror-docker.artefacts.service.consulverse:5020"
+    ]
+}

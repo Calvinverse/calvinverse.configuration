@@ -79,7 +79,7 @@
     -->
     <ItemGroup Condition=" '$(ShouldLoadFilesToCopy)' == 'true' ">
         <FilesToCopy
-            Include="$(DirSrc)\iso\**\*.*">
+            Include="$(DirConfig)\iso\**\*.*">
             <Destination>$(DirBuildTempIso)</Destination>
         </FilesToCopy>
     </ItemGroup>
