@@ -5,6 +5,14 @@
             "vhost": ""
         }
     },
-    "host" : "active.queue",
-    "port" : 5672
+    "protocols" : {
+        "http": {
+            "host": "http.queue",
+            "port": "15672"
+        },
+        "amqp": {
+            "host": "amqp.queue",
+            "port": "5672"
+        }
+    }
 }

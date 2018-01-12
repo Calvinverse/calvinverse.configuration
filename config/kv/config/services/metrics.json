@@ -1,4 +1,12 @@
 {
-    "host": "write.metrics",
-    "port": 4242
+    "protocols" : {
+        "opentsdb" : {
+            "host": "opentsdb.metrics",
+            "port": 4242
+        },
+        "statsd": {
+            "host": "statsd.metrics",
+            "port": ""
+        }
+    }
 }
