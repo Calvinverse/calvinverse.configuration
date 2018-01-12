@@ -13,5 +13,7 @@
         <file src="${DirTemp}\iso\shared\nomad\server\*.*" target="nomad\server" />
 
         <file src="${DirTemp}\iso\shared\unbound\*.*" target="unbound" />
+
+        <file src="${DirTemp}\iso\shared\*.json" target="" />
     </files>
 </iso>
