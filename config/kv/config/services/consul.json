@@ -1,4 +1,7 @@
 {
-    "datacenter": "calvinverse-01",
-    "domain": "consulverse"
+    "base" : "config/services/consul",
+    "keys" : {
+        "datacenter": "calvinverse-01",
+        "domain": "consulverse"
+    }
 }

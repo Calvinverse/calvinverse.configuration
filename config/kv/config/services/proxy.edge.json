@@ -1,0 +1,9 @@
+{
+    "base" : "config/services/proxy.edge",
+    "keys" : {
+        "ui" : {
+            "color" : "light-blue",
+            "title" : ""
+        }
+    }
+}

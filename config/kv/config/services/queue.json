@@ -1,18 +1,21 @@
 {
-    "logs" : {
-        "syslog" : {
-            "username": "",
-            "vhost": ""
-        }
-    },
-    "protocols" : {
-        "http": {
-            "host": "http.queue",
-            "port": "15672"
+    "base" : "config/services/queue",
+    "keys" : {
+        "logs" : {
+            "syslog" : {
+                "username": "",
+                "vhost": ""
+            }
         },
-        "amqp": {
-            "host": "amqp.queue",
-            "port": "5672"
+        "protocols" : {
+            "http": {
+                "host": "http.queue",
+                "port": "15672"
+            },
+            "amqp": {
+                "host": "amqp.queue",
+                "port": "5672"
+            }
         }
     }
 }
