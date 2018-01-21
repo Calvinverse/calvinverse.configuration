@@ -1,0 +1,5 @@
+config/services/metrics/protocols/opentsdb/host : opentsdb.metrics
+config/services/metrics/protocols/opentsdb/port : 4242
+
+config/services/metrics/protocols/statsd/host : statsd.metrics
+config/services/metrics/protocols/statsd/port : 8125

@@ -1,0 +1,2 @@
+config/services/consul/datacenter: calvinverse-01
+config/services/consul/domain: consulverse
