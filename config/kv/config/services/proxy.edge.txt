@@ -1,2 +1,0 @@
-config/services/proxy.edge/ui/color : light-blue
-config/services/proxy.edge/ui/title  : ""

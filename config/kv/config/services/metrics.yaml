@@ -1,0 +1,21 @@
+config:
+  - key: config/services/metrics/protocols/opentsdb/host
+    value: opentsdb.metrics
+
+  - key: config/services/metrics/protocols/opentsdb/port
+    value: 4242
+
+  - key: config/services/metrics/protocols/statsd/host
+    value: statsd.metrics
+
+  - key: config/services/metrics/protocols/statsd/port
+    value: 8125
+
+  - key: config/services/metrics/databases/system
+    value: system
+
+  - key: config/services/metrics/databases/statsd
+    value: services
+
+  - key: config/services/metrics/databases/services
+    value: services

@@ -1,8 +1,0 @@
-config/services/queue/logs/syslog/username : ""
-config/services/queue/logs/syslog/vhost : ""
-
-config/services/queue/protocols/http/host : http.queue
-config/services/queue/protocols/http/port: 15672
-
-config/services/queue/protocols/amqp/host : amqp.queue
-config/services/queue/protocols/amqp/port: 5672
