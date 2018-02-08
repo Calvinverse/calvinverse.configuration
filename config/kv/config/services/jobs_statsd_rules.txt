@@ -1,1 +1,11 @@
-# NOMAD STATSD RULES HERE
+nomad.*.client.* service.host.measurement.measurement*
+nomad.*.nomad.* service.host.measurement.measurement*
+nomad.*.runtime.* service.host.measurement.measurement*
+nomad.nomad.* .service.measurement*
+nomad.broker.* service.measurement*
+nomad.client.* service.measurement*
+nomad.heartbeat.* service.measurement*
+nomad.memberlist.* service.measurement*
+nomad.plan.* service.measurement*
+nomad.rpc.* service.measurement*
+nomad.worker.* service.measurement*
