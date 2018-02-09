@@ -1,21 +1,30 @@
 config:
+  - key: config/services/metrics/protocols/collectd/host
+    value: collectd.metrics
+
+  - key: config/services/metrics/protocols/collectd/port
+    value: 25826
+
+  - key: config/services/metrics/protocols/graphite/host
+    value: graphite.metrics
+
+  - key: config/services/metrics/protocols/graphite/port
+    value: 2003
+
+  - key: config/services/metrics/protocols/http/host
+    value: http.metrics
+
+  - key: config/services/metrics/protocols/http/port
+    value: 8086
+
   - key: config/services/metrics/protocols/opentsdb/host
     value: opentsdb.metrics
 
   - key: config/services/metrics/protocols/opentsdb/port
     value: 4242
 
-  - key: config/services/metrics/protocols/statsd/host
-    value: statsd.metrics
-
-  - key: config/services/metrics/protocols/statsd/port
-    value: 8125
-
   - key: config/services/metrics/databases/system
     value: system
 
   - key: config/services/metrics/databases/statsd
-    value: services
-
-  - key: config/services/metrics/databases/services
     value: services
