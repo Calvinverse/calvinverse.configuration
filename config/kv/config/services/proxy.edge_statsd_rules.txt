@@ -1,1 +1,1 @@
-fabio.* service.host.measurement*
+"fabio.* service.host.measurement*",
