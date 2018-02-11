@@ -23,8 +23,17 @@ config:
   - key: config/services/metrics/protocols/opentsdb/port
     value: 4242
 
-  - key: config/services/metrics/databases/system
-    value: system
+  - key: config/services/metrics/protocols/udp/host
+    value: udp.metrics
+
+  - key: config/services/metrics/protocols/udp/port
+    value: 8089
+
+  - key: config/services/metrics/databases/services
+    value: services
 
   - key: config/services/metrics/databases/statsd
     value: services
+
+  - key: config/services/metrics/databases/system
+    value: system
