@@ -1,9 +1,6 @@
 config:
-  - key: config/services/queue/logs/syslog/username
-    value: ""
-
   - key: config/services/queue/logs/syslog/vhost
-    value: ""
+    value: "logs"
 
   - key: config/services/queue/protocols/http/host
     value: http.queue
