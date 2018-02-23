@@ -1,1 +1,1 @@
-"fabio.* service.host.measurement*",
+"fabio.* .host.measurement* service=fabio",
