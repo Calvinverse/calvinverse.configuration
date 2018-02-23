@@ -4,6 +4,8 @@ param(
     [string] $serverAddress
 )
 
+$ErrorActionPreference = 'Stop'
+
 & $vaultPath `
     write `
     -address=$($serverAddress) `
