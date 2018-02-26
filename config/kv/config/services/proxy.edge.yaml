@@ -3,7 +3,7 @@ config:
     value: light-blue
 
   - key: config/services/proxy.edge/ui/title
-    value: ""
+    value: "[Calvinverse-01]"
 
   - key: config/services/proxy.edge/statsd/rules
     file: proxy.edge_statsd_rules.txt
