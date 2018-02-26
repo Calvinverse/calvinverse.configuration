@@ -16,7 +16,7 @@ foreach($file in $files)
 
     $arguments = @(
         "sys/policy/$($policyName)",
-        "policy=@$($fileName)"
+        "policy=@$(Join-Path $PSScriptRoot $fileName)"
     )
 
     Write-Output "Writing policy $($policyName) from $($fileName)"

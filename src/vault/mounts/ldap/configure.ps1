@@ -42,7 +42,7 @@ Invoke-Vault `
     -arguments $ldapConfigArguments
 
 $ldapAdminArguments = @(
-    'auth/ldap/groups/"Infrastructure Admins"',
+    'auth/ldap/groups/"Infrastructure Administrators"',
     'policies=admin'
 )
 Invoke-Vault `

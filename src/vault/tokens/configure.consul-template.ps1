@@ -6,17 +6,25 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-& $vaultPath `
-    write `
-    -address=$($serverAddress) `
-    -tls-skip-verify=1 `
-    auth/token/roles/system.shared `
-    period=1h `
-    allowed_policies="default,logs.syslog.writer,metrics.http.writer"
+. (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
 
-& $vaultPath `
-    write `
-    -address=$($serverAddress) `
-    -tls-skip-verify=1 `
-    -f `
-    auth/token/create/system.shared
+$createRole = @(
+    'auth/token/roles/system.shared',
+    'period=1h',
+    'allowed_policies="default,logs.syslog.writer,metrics.http.writer"'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -serverAddress $serverAddress `
+    -command 'write' `
+    -arguments $createRole
+
+$createToken = @(
+    '-force',
+    'auth/token/create/system.shared'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -serverAddress $serverAddress `
+    -command 'write' `
+    -arguments $createToken

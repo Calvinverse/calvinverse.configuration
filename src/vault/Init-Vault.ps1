@@ -6,7 +6,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-. (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
+. (Join-Path $PSScriptRoot 'helpers.ps1')
 
 Invoke-Vault `
     -vaultPath $vaultPath `
