@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -13,6 +13,6 @@ $args = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'auth enable' `
     -arguments $args

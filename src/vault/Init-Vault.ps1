@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,5 +10,5 @@ $ErrorActionPreference = 'Stop'
 
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'operator init'

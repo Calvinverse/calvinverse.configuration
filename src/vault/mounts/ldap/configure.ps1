@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress,
+    [string] $vaultServerAddress,
     [string] $ldapServerNameOrIp,
     [string] $userDn = 'OU=People,OU=Calvinverse Users,DC=ad,DC=calvinverse,DC=net',
     [string] $groupDn = 'OU=Users,OU=Calvinverse Groups,DC=ad,DC=calvinverse,DC=net',
@@ -18,7 +18,7 @@ $enableLdap = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'auth enable' `
     -arguments $enableLdap
 
@@ -37,7 +37,7 @@ $ldapConfigArguments = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $ldapConfigArguments
 
@@ -47,6 +47,6 @@ $ldapAdminArguments = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $ldapAdminArguments

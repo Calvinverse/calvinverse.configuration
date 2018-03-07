@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,16 +15,6 @@ $createRole = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $createRole
-
-$createToken = @(
-    '-force',
-    'auth/token/create/system.shared'
-)
-Invoke-Vault `
-    -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
-    -command 'write' `
-    -arguments $createToken

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -20,7 +20,7 @@ $createApprole = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $createApprole
 
@@ -30,7 +30,7 @@ $createRoleId = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $createRoleId
 
@@ -42,6 +42,6 @@ $createSecretStore = @(
 )
 Invoke-Vault `
         -vaultPath $vaultPath `
-        -serverAddress $serverAddress `
+        -vaultServerAddress $vaultServerAddress `
         -command 'write' `
         -arguments $createSecretStore

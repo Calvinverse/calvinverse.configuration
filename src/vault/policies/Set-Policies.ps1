@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,7 +22,7 @@ foreach($file in $files)
     Write-Output "Writing policy $($policyName) from $($fileName)"
     Invoke-Vault `
         -vaultPath $vaultPath `
-        -serverAddress $serverAddress `
+        -vaultServerAddress $vaultServerAddress `
         -command 'write' `
         -arguments $arguments
 }
