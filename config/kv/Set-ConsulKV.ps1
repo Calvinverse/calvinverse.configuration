@@ -1,13 +1,13 @@
 [CmdletBinding()]
 param(
     [string] $consulDatacenter = 'calvinverse-01',
-    [string] $port = '8500',
-    [string] $serverIp = $( throw 'Please specify the IP address for the consul server' )
+    [string] $consulPort = '8500',
+    [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
 )
 
 Write-Verbose "Set-ConsulKV: param consulDatacenter = $consulDatacenter"
-Write-Verbose "Set-ConsulKV: param port = $port"
-Write-Verbose "Set-ConsulKV: param serverIp = $serverIp"
+Write-Verbose "Set-ConsulKV: param port = $consulPort"
+Write-Verbose "Set-ConsulKV: param serverIp = $consulServerAddress"
 
 $ErrorActionPreference = 'Stop'
 $commonParameterSwitches =
@@ -68,7 +68,7 @@ try
 
                 Write-Output "Writing k-v with key: $($key) - value: $($value) ... "
 
-                $url = "http://$($serverIp):$($port)/v1/kv/$($key)"
+                $url = "http://$($consulServerAddress):$($consulPort)/v1/kv/$($key)"
                 $responseBytes = $webClient.UploadData($url, "PUT", $bytes)
                 $response = [System.Text.Encoding]::ASCII.GetString($responseBytes)
                 Write-Output "Wrote k-v with key: $($key) - value: $($value). Response: $($response)"
