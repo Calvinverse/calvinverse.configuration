@@ -1,0 +1,9 @@
+config:
+  - key: config/services/consul/datacenter
+    value: calvinverse-01
+
+  - key: config/services/consul/domain
+    value: consulverse
+
+  - key: config/services/consul/metrics/statsd/rules
+    file: consul_statsd_rules.txt
