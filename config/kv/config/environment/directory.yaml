@@ -1,0 +1,15 @@
+config:
+  - key: config/environment/directory/endpoints/hosts/adhost
+    value: 127.0.0.1
+
+  - key: config/environment/directory/query/users/lookupbase
+    value: DC=ad,Dc=example,DC=com
+
+  - key: config/environment/directory/query/groups/lookupbase
+    value: DC=ad,Dc=example,DC=com
+
+  - key: config/environment/directory/query/groups/queue/administrators
+    value: CN=Admins,OU=Groups,DC=ad,DC=example,DC=com
+
+  - key: config/environment/directory/initialized
+    value: true
