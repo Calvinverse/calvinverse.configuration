@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0"
-         DefaultTargets="ToolsPipeline_Deploy_PushTo_Consul_KV_Run"
+         DefaultTargets="CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_Run"
          xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <!-- Defines whether the current script file has been loaded / imported or not -->
@@ -20,31 +20,56 @@
         Condition="Exists('$(FileImports)') AND '$(ExistsFileImports)' != 'true' "
         Project="$(FileImports)" />
 
+    <Target Name="_CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_GetToolPaths">
+        <NuGetInstall
+            Condition=" '$(LibraryExternalCSharpYamlDir)' == 'UNDEFINED' "
+            ErrorInformation="@(ErrorInformation)"
+            ExcludeVersion="$(ShouldRestoreNuGetPackagesWithoutVersionInPath)"
+            NuGetExecutablePath="$(ToolsExternalNuGetPath)"
+            PackagesDirectory="$(DirPackages)"
+            PackageName="YamlDotNet"
+            PackageVersion="$(LibraryExternalCSharpYamlVersion)"
+            Sources="@(NuGetSources)"
+            WorkingDirectory="$(DirWorkspace)" />
+        <!--
+            The YamlDotNet package has multiple versions of the DLL for different frameworks, so we
+            'hard-code' the path
+        -->
+        <CreateProperty
+            Condition=" '$(LibraryExternalCSharpYamlDir)' == 'UNDEFINED' AND '$(ShouldRestoreNuGetPackagesWithoutVersionInPath)' != 'true' "
+            Value=".$(LibraryExternalCSharpYamlVersion)">
+            <Output
+                PropertyName="YamlDotNetNuGetVersion"
+                TaskParameter="Value" />
+        </CreateProperty>
+        <CreateProperty
+            Condition=" '$(LibraryExternalCSharpYamlDir)' == 'UNDEFINED' "
+            Value="$(DirPackages)\YamlDotNet$(YamlDotNetNuGetVersion)\lib\net45">
+            <Output
+                PropertyName="LibraryExternalCSharpYamlDir"
+                TaskParameter="Value" />
+        </CreateProperty>
+        <Message
+            Condition="Exists('$(LibraryExternalCSharpYamlDir)') "
+            Text="The YamlDotNet DLL was found at: $(LibraryExternalCSharpYamlDir)" />
+        <Error
+            Code="$(NBuildKitErrorCodeToolFileNotFound)"
+            Condition="!Exists('$(LibraryExternalCSharpYamlDir)') "
+            HelpKeyword="$(NBuildKitErrorIdToolFileNotFound)"
+            Text="Could not locate the YamlDotNet DLL install path." />
+    </Target>
+
     <Target
         Condition=" '@(ConsulKVFilesToPush)' != '' "
-        Name="ToolsPipeline_Deploy_PushTo_Consul_KV_Run"
-        Outputs="%(ConsulKVFilesToPush.Identity)">
-        <CreateProperty Value="%(ConsulKVFilesToPush.FullPath)">
-            <Output
-                PropertyName="FileToUpload"
-                TaskParameter="Value" />
-        </CreateProperty>
-        <CreateProperty Value="$([MSBuild]::MakeRelative($(DirBuildTemp), $(FileToUpload)))">
-            <Output
-                PropertyName="RelativePath"
-                TaskParameter="Value" />
-        </CreateProperty>
-        <CreateProperty Value="$(RelativePath.Replace('\', '/'))">
-            <Output
-                PropertyName="Key"
-                TaskParameter="Value" />
-        </CreateProperty>
+        DependsOnTargets="_CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_GetToolPaths"
+        Name="CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_Run">
 
-        <ToolsPipeline_Deploy_PushTo_Consul_KV_LocalTask_Upload
+        <CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_LocalTask_Upload
             Address="http://localhost:8500"
+            Condition=" '@(ConsulKVFilesToPush)' != '' "
             Datacenter="$(Datacenter)"
-            FilePath="$(FileToUpload)"
-            Key="$(Key)"/>
+            Items="@(ConsulKVFilesToPush)"
+            YamlDotNetDir="$(LibraryExternalCSharpYamlDir)"/>
     </Target>
 
     <!--
@@ -54,7 +79,7 @@
     <UsingTask
         AssemblyFile="$(MsBuildTasksAssembly)"
         TaskFactory="CodeTaskFactory"
-        TaskName="ToolsPipeline_Deploy_PushTo_Consul_KV_LocalTask_Upload">
+        TaskName="CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_LocalTask_Upload">
         <ParameterGroup>
             <Address
                 ParameterType="System.String"
@@ -62,52 +87,260 @@
             <Datacenter
                 ParameterType="System.String"
                 Required="true"/>
-            <FilePath
-                ParameterType="System.String"
+            <Items
+                ParameterType="Microsoft.Build.Framework.ITaskItem[]"
                 Required="true" />
-            <Key
+            <YamlDotNetDir
                 ParameterType="System.String"
                 Required="true" />
         </ParameterGroup>
         <Task>
             <Code
                 Language="cs"
-                Type="Method">
+                Type="class">
                 <![CDATA[
-                    public override bool Execute()
+                    public sealed class CalvinverseInfrastructure_Deploy_PushTo_Consul_KV_LocalTask_Upload : Microsoft.Build.Utilities.Task
                     {
-                        string content = null;
-                        using (var reader = new System.IO.StreamReader(FilePath))
+                        private System.Reflection.MethodInfo _deserializerMethod;
+
+                        [Microsoft.Build.Framework.Required]
+                        public string Address
                         {
-                            content = reader.ReadToEnd();
+                            get;
+                            set;
                         }
 
-                        if (!string.IsNullOrWhiteSpace(content))
+                        [Microsoft.Build.Framework.Required]
+                        public string Datacenter
                         {
-                            using (var client = new System.Net.WebClient())
-                            {
-                                var address = string.Format(
-                                    System.Globalization.CultureInfo.InvariantCulture,
-                                    "{0}/v1/kv/{1}?dc={2}",
-                                    Address,
-                                    Key,
-                                    Datacenter);
+                            get;
+                            set;
+                        }
 
-                                Log.LogMessage(
-                                    string.Format(
-                                    System.Globalization.CultureInfo.InvariantCulture,
-                                    "Uploading contents of '{0}' to {1}",
-                                    FilePath,
-                                    address));
-                                var bytes = Encoding.UTF8.GetBytes(content);
-                                client.UploadData(address, "PUT", bytes);
+                        [Microsoft.Build.Framework.Required]
+                        public Microsoft.Build.Framework.ITaskItem[] Items
+                        {
+                            get;
+                            set;
+                        }
+
+                        [Microsoft.Build.Framework.Required]
+                        public string YamlDotNetDir
+                        {
+                            get;
+                            set;
+                        }
+
+                        public override bool Execute()
+                        {
+                            if ((Items == null) || (Items.Length == 0))
+                            {
+                                Log.LogError("No files to upload");
+                                return false;
+                            }
+
+                            if (string.IsNullOrWhiteSpace(YamlDotNetDir))
+                            {
+                                Log.LogError("No path provided for the YamlDotNet DLL.");
+                                return false;
+                            }
+
+                            if (!System.IO.Directory.Exists(YamlDotNetDir))
+                            {
+                                Log.LogError(
+                                    "Failed to find the YamlDotNet DLL. Expected to find it in: {0} but that directory does not exist.",
+                                    YamlDotNetDir);
+                                return false;
+                            }
+
+                            using (var webClient = new System.Net.WebClient())
+                            {
+                                var builder = CreateYamlDeserializer();
+                                foreach (var item in Items)
+                                {
+                                    var path = System.IO.Path.GetFullPath(item.ItemSpec);
+                                    Log.LogMessage(
+                                        Microsoft.Build.Framework.MessageImportance.Low,
+                                        "Processing {0} ...",
+                                        path);
+
+                                    var entries = GetEntryList(path, builder);
+                                    foreach (var entry in entries.Config)
+                                    {
+                                        try
+                                        {
+                                            var address = string.Format(
+                                                System.Globalization.CultureInfo.InvariantCulture,
+                                                "{0}/v1/kv/{1}?dc={2}",
+                                                Address,
+                                                entry.Key,
+                                                Datacenter);
+
+                                            object value = null;
+                                            byte[] bytes = null;
+                                            if (!string.IsNullOrWhiteSpace(entry.File))
+                                            {
+                                                var referencedPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(path), entry.File);
+                                                var valueText = System.IO.File.ReadAllText(referencedPath);
+                                                bytes = System.Text.Encoding.UTF8.GetBytes(valueText);
+
+                                                Log.LogMessage(
+                                                    Microsoft.Build.Framework.MessageImportance.Low,
+                                                    "Writing k-v [key: {0} - file content from: {1}] to {2}",
+                                                    entry.Key,
+                                                    referencedPath,
+                                                    address);
+                                                value = valueText;
+                                            }
+                                            else
+                                            {
+                                                bytes = System.Text.Encoding.UTF8.GetBytes(entry.Value.ToString());
+
+                                                Log.LogMessage(
+                                                    Microsoft.Build.Framework.MessageImportance.Low,
+                                                    "Writing k-v [key: {0} - value: {1}] to {2}",
+                                                    entry.Key,
+                                                    entry.Value,
+                                                    address);
+                                                value = entry.Value;
+                                            }
+
+                                            var responseBytes = webClient.UploadData(address, "PUT", bytes);
+                                            var response = System.Text.Encoding.ASCII.GetString(responseBytes);
+                                            Log.LogMessage(
+                                                Microsoft.Build.Framework.MessageImportance.Normal,
+                                                "Wrote to k-v at {0}. Response: {1}] to {2}",
+                                                entry.Key,
+                                                response,
+                                                address);
+                                        }
+                                        catch (System.Exception e)
+                                        {
+                                            Log.LogError(
+                                                "Failed to store the pair from {0}: key: {1} - value: {2} - file: {3}. The error was: {4}",
+                                                path,
+                                                entry.Key,
+                                                entry.Value,
+                                                entry.File,
+                                                e);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Log.HasLoggedErrors is true if the task logged any errors -- even if they were logged
+                            // from a task's constructor or property setter. As long as this task is written to always log an error
+                            // when it fails, we can reliably return HasLoggedErrors.
+                            return !Log.HasLoggedErrors;
+                        }
+
+                        private object CreateYamlDeserializer()
+                        {
+                            // Beware all who enter here, there be reflection dragons here ...
+                            //
+                            // This is yucky because the Assembly containing the types isn't loaded when MsBuild compiles the code. This means we
+                            // can't use type names from that assembly, so we resort to nasty reflection
+                            var namingConventionsType = System.Type.GetType(
+                                "YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention",
+                                null,
+                                GetTypeFromYamlDotNetAssembly,
+                                true,
+                                false);
+                            var namingConvention = System.Activator.CreateInstance(namingConventionsType);
+
+                            var deserializerBuilderType = System.Type.GetType(
+                                "YamlDotNet.Serialization.DeserializerBuilder",
+                                null,
+                                GetTypeFromYamlDotNetAssembly,
+                                true,
+                                false);
+                            var deserializerBuilder = System.Activator.CreateInstance(deserializerBuilderType, false);
+
+                            var almostCompleteBuilder = deserializerBuilderType.InvokeMember(
+                                "WithNamingConvention",
+                                System.Reflection.BindingFlags.InvokeMethod,
+                                null,
+                                deserializerBuilder,
+                                new object[] { namingConvention });
+                            var builder = deserializerBuilderType.InvokeMember(
+                                "Build",
+                                System.Reflection.BindingFlags.InvokeMethod,
+                                null,
+                                almostCompleteBuilder,
+                                null);
+                            return builder;
+                        }
+
+                        private KeyValueEntryList GetEntryList(string path, object builder)
+                        {
+                            if (_deserializerMethod == null)
+                            {
+                                // And because we still cannot use type names, more reflection!
+                                var deserializerType = System.Type.GetType(
+                                    "YamlDotNet.Serialization.Deserializer",
+                                    null,
+                                    GetTypeFromYamlDotNetAssembly,
+                                    true,
+                                    false);
+
+                                _deserializerMethod = deserializerType.GetMethod("Deserialize", new System.Type[] { typeof(System.IO.TextReader), typeof(System.Type) });
+                            }
+
+                            var input = new System.IO.StringReader(System.IO.File.ReadAllText(path));
+                            return _deserializerMethod.Invoke(builder, new object[] { input, typeof(KeyValueEntryList) }) as KeyValueEntryList;
+                        }
+
+                        private System.Type GetTypeFromYamlDotNetAssembly(System.Reflection.Assembly assembly, string typeName, bool ignoreCase)
+                        {
+                            if (assembly == null)
+                            {
+                                var assemblyPath = System.IO.Path.Combine(YamlDotNetDir, "YamlDotNet.dll");
+                                try
+                                {
+                                    assembly = System.Reflection.Assembly.LoadFrom(assemblyPath);
+                                }
+                                catch (System.Exception e)
+                                {
+                                    Log.LogError(
+                                        "Failed to load the YamlDotNet DLL. Expected to find it in: {0}. The exception was: {1}",
+                                        assemblyPath,
+                                        e);
+                                    return null;
+                                }
+                            }
+
+                            return assembly.GetType(typeName, true, ignoreCase);
+                        }
+
+                        public sealed class KeyValueEntryList
+                        {
+                            public KeyValueEntry[] Config
+                            {
+                                get;
+                                set;
                             }
                         }
 
-                        // Log.HasLoggedErrors is true if the task logged any errors -- even if they were logged
-                        // from a task's constructor or property setter. As long as this task is written to always log an error
-                        // when it fails, we can reliably return HasLoggedErrors.
-                        return !Log.HasLoggedErrors;
+                        public sealed class KeyValueEntry
+                        {
+                            public string Key
+                            {
+                                get;
+                                set;
+                            }
+
+                            public string File
+                            {
+                                get;
+                                set;
+                            }
+
+                            public object Value
+                            {
+                                get;
+                                set;
+                            }
+                        }
                     }
                 ]]>
             </Code>
