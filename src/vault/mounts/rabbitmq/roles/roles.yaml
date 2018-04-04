@@ -1,0 +1,9 @@
+- roles:
+  - key: "rabbitmq/roles/logs.syslog.writer"
+    value: vhosts='{"logs":{"write":".*"}}'
+
+  - key: "rabbitmq/roles/builds.queue.writer"
+    value: vhosts='{"builds":{"write":".*"}}'
+
+  - key: "rabbitmq/roles/builds.queue.reader"
+    value: vhosts='{"builds":{"read":".*"}}'
