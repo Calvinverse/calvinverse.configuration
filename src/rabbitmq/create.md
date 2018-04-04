@@ -16,7 +16,21 @@
 ## Logs
 
 * Create the `logs` vhost
-  * Name: logs
+  * Name: `logs`
+* Create the `syslog` queue
+  * Name: `syslog`
+  * Durability: `Durable`
+  * Auto delete: `no`
+
+
+## Builds
+
+* Create the `builds` vhost
+  * Name: `builds`
+* Create the `builds` queue
+  * Name: `builds`
+  * Durability: `Durable`
+  * Auto delete: `no`
 
 ## Metrics
 
@@ -31,8 +45,8 @@
 
 ## Vault
 
-* Create a `vault_administrator` user which will be used by vault to create users and queues etc.
-  * Name: `vault_administrator`
+* Create a `user.vault` user which will be used by vault to create users and queues etc.
+  * Name: `user.vault`
   * Password: Generate one ...
   * Tags: Administrator
-* Grant `vault_administrator` access to the `logs` vhost
+* Grant `user.vault` access to the `logs` and the `builds` vhosts
