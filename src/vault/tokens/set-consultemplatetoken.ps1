@@ -2,6 +2,7 @@
 param(
     [string] $vaultPath,
     [string] $vaultServerAddress,
+    [string] $role = 'system.shared',
     [string] $machineName,
     [string] $consulPort = '8500',
     [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
@@ -15,7 +16,7 @@ $createToken = @(
     '-force',
     '-wrap-ttl=30m',
     '-format=json',
-    'auth/token/create/system.shared'
+    "auth/token/create/$($role)"
 )
 $returnValue = Invoke-Vault `
     -vaultPath $vaultPath `

@@ -18,3 +18,14 @@ Invoke-Vault `
     -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $createRole
+
+$createRole = @(
+    'auth/token/roles/build.master',
+    'period=1h',
+    'allowed_policies="default,logs.syslog.writer,metrics.http.writer,builds.queue.reader,environment.directory.bind"'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
