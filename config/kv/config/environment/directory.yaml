@@ -1,15 +1,67 @@
 config:
+  # The 'name' of the directory, in the form of ad.example.com.
+  # Used by:
+  # - Jenkins: as the active directory to contact
+  # - Nexus: as the name of the active directory configuration
+  - key: config/environment/directory/name
+    value: ad.example.com
+
+  # The name or IP address of the main active directory host.
+  # Used by:
+  # - Nexus
+  - key: config/environment/directory/endpoints/mainhost
+    value: 127.0.0.1
+
+  # The list of active directory hosts
+  # Used by:
+  # - RabbitMQ
   - key: config/environment/directory/endpoints/hosts/adhost
     value: 127.0.0.1
 
+  # The active directory identifier for the user that will be used to perform queries
+  # Used by:
+  # - Jenkins
+  # - Nexus
+  - key: config/environment/directory/users/bindcn
+    value: CN=ad-bind-user,OU=Users,DC=ad,DC=example,DC=com
+
+  # The AD query that is used to find a user based on the CN
+  # Used by:
+  # - Nexus
+  - key: config/environment/directory/filter/users/getuser
+    value: "(&(objectCategory=Person)(cn=*))"
+
+  # The base 'level' for all queries that are not user and group queries
+  # Used by:
+  # - Nexus
+  - key: config/environment/directory/query/lookupbase
+    value: DC=ad,Dc=example,DC=com
+
+  # The base 'level' for all queries that are user lookups
+  # Used by:
+  # - Nexus
+  # - RabbitMQ
   - key: config/environment/directory/query/users/lookupbase
     value: DC=ad,Dc=example,DC=com
 
+  # The base 'level' for all queries that are group lookups
+  # Used by:
+  # - RabbitMQ
   - key: config/environment/directory/query/groups/lookupbase
     value: DC=ad,Dc=example,DC=com
 
+  # The name of the group which will be used as administrators on Jenkins
+  # Used by:
+  # - Jenkins
+  - key: config/environment/directory/query/groups/builds/administrators
+    value: Admins
+
+  # The CN of the group which will be used as administrators on RabbitMQ
+  # Used by:
+  # - RabbitMQ
   - key: config/environment/directory/query/groups/queue/administrators
     value: CN=Admins,OU=Groups,DC=ad,DC=example,DC=com
 
+  # Note this key has to be last because it indicates that all the other keys are there
   - key: config/environment/directory/initialized
     value: true
