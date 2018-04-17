@@ -15,6 +15,7 @@ config:
   # The list of active directory hosts
   # Used by:
   # - RabbitMQ
+  # - Jenkins
   - key: config/environment/directory/endpoints/hosts/adhost
     value: 127.0.0.1
 
