@@ -41,7 +41,7 @@ $createSecretStore = @(
     'BulletinPath="secret/bulletins/"'
 )
 Invoke-Vault `
-        -vaultPath $vaultPath `
-        -vaultServerAddress $vaultServerAddress `
-        -command 'write' `
-        -arguments $createSecretStore
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createSecretStore
