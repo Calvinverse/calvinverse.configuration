@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
 
 $createRole = @(
-    'auth/token/roles/system.shared',
+    'auth/token/roles/system.logsandmetrics',
     'period=1h',
     'allowed_policies="default,logs.syslog.writer,metrics.http.writer"'
 )
