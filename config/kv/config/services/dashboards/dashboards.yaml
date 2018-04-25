@@ -1,0 +1,11 @@
+config:
+  # Note the datasources should line up with the ones defined in the metrics/metrics.yaml location
+
+  # Define the datasource for the services metrics database
+  - key: config/services/dashboards/metrics/provisioning/datasources/services
+    file: datasources/services.notkv.yaml
+
+  # Define the datasource for the system metrics database
+  - key: config/services/dashboards/metrics/provisioning/datasources/system
+    file: datasources/system.notkv.yaml
+
