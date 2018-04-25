@@ -16,7 +16,7 @@ $createToken = @(
     '-force',
     '-wrap-ttl=30m',
     '-format=json',
-    "auth/token/create-orphan/$($role)"
+    "auth/token/create/$($role)"
 )
 $returnValue = Invoke-Vault `
     -vaultPath $vaultPath `
