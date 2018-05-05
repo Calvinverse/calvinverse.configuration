@@ -2,7 +2,7 @@
 param(
     [string] $vaultPath,
     [string] $vaultServerAddress,
-    [string] $role = 'system.logsandmetrics',
+    [string] $role = 'system.logsandmetrics', # other options are build.master, metrics.dashboards
     [string] $machineName,
     [string] $consulPort = '8500',
     [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
