@@ -2,21 +2,21 @@
 
 ## Health
 
-* Create the `health` vhost
-  * Name: health
-* Create the `health` user
-  * User name: health
+* Create the `vhost.health` vhost
+  * Name: `vhost.health`
+* Create the `user.health` user
+  * User name: `user.health`
   * Password: health
   * Tags: Management
-* Grant `health` user access to the `health` vhost
+* Grant `user.health` user access to the `vhost.health` vhost
   * read: '.*'
   * write: '.*'
   * configure: '.*'
 
 ## Logs
 
-* Create the `logs` vhost
-  * Name: `logs`
+* Create the `vhost.logs` vhost
+  * Name: `vhost.logs`
 * Create the `syslog` queue
   * Name: `syslog`
   * Durability: `Durable`
@@ -25,8 +25,8 @@
 
 ## Builds
 
-* Create the `builds` vhost
-  * Name: `builds`
+* Create the `vhost.builds` vhost
+  * Name: `vhost.builds`
 * Create the `builds` queue
   * Name: `builds`
   * Durability: `Durable`
@@ -34,11 +34,11 @@
 
 ## Metrics
 
-* Create the `metrics` user
-  * Name: metrics
-  * Password: metrics
+* Create the `user.metrics` user
+  * Name: `user.metrics`
+  * Password: `metrics`
   * Tags: Monitoring
-* Grant `metrics` user access to all the vhosts
+* Grant `user.metrics` user access to all the vhosts
   * read: '.*'
   * write: ''
   * configure: ''

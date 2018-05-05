@@ -1,9 +1,9 @@
 - roles:
-  - key: "rabbitmq/roles/logs.syslog.writer"
-    value: vhosts='{"logs":{"write":".*"}}'
+  - name: "rabbitmq/roles/logs.syslog.writer"
+    policy: vhosts='{"vhost.logs":{"write":".*"}}'
 
-  - key: "rabbitmq/roles/builds.queue.writer"
-    value: vhosts='{"builds":{"write":".*"}}'
+  - name: "rabbitmq/roles/builds.queue.writer"
+    policy: vhosts='{"vhost.builds":{"write":".*"}}'
 
-  - key: "rabbitmq/roles/builds.queue.reader"
-    value: vhosts='{"builds":{"read":".*"}}'
+  - name: "rabbitmq/roles/builds.queue.reader"
+    policy: vhosts='{"vhost.builds":{"read":".*"}}'
