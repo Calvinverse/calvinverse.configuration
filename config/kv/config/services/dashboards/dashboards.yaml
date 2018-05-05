@@ -8,4 +8,3 @@ config:
   # Define the datasource for the system metrics database
   - key: config/services/dashboards/metrics/provisioning/datasources/system
     file: datasources/system.notkv.yaml
-
