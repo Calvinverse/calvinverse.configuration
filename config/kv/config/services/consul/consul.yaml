@@ -1,0 +1,12 @@
+config:
+  # Defines the datacenter name of the current environment.
+  # NOTE: when changing this value also change the value in the
+  #       config/iso/services/consul/consul_region.json file!
+  - key: config/services/consul/datacenter
+    value: calvinverse-01
+
+  # Defines the datacenter name of the current environment.
+  # NOTE: when changing this value also change the value in the
+  #       config/iso/services/consul/consul_region.json file!
+  - key: config/services/consul/domain
+    value: consulverse
