@@ -1,0 +1,6 @@
+config:
+  - key: config/services/proxy.edge/ui/color
+    value: light-blue
+
+  - key: config/services/proxy.edge/ui/title
+    value: "[Calvinverse-01]"

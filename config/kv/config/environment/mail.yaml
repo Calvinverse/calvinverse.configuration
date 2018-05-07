@@ -1,0 +1,6 @@
+config:
+  - key: config/environment/mail/smtp/host
+    value: smtp.calvinverse.net
+
+  - key: config/environment/mail/suffix
+    value: calvinverse.net

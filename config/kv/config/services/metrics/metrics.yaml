@@ -1,0 +1,15 @@
+config:
+  # Defines the name of the metrics database that stores information for
+  # the different services in the environment
+  - key: config/services/metrics/databases/services
+    value: services
+
+  # Defines the name of the metrics database that stores information obtained
+  # via the StatsD protocol
+  - key: config/services/metrics/databases/statsd
+    value: services
+
+  # Defines the name of the metrics database that stores information for
+  # the different systems / resources in the environment
+  - key: config/services/metrics/databases/system
+    value: system
