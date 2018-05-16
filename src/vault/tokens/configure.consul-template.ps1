@@ -21,6 +21,18 @@ Invoke-Vault `
     -arguments $createRole
 
 $createRole = @(
+    'auth/token/roles/http.artefacts',
+    'period=1h',
+    'orphan=true',
+    'allowed_policies="default,logs.syslog.writer,environment.directory.bind"'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
+
+$createRole = @(
     'auth/token/roles/build.master',
     'period=1h',
     'orphan=true',
