@@ -9,10 +9,10 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
 
 $createRole = @(
-    'auth/token/roles/system.logsandmetrics',
+    'auth/token/roles/role.system.logsandmetrics',
     'period=1h',
     'orphan=true',
-    'allowed_policies="default,logs.syslog.writer,metrics.http.writer"'
+    'allowed_policies="default,rabbitmq.creds.write.vhost.logs.syslog,secret.write.metrics.http"'
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
@@ -21,10 +21,10 @@ Invoke-Vault `
     -arguments $createRole
 
 $createRole = @(
-    'auth/token/roles/build.master',
+    'auth/token/roles/role.artefacts.http',
     'period=1h',
     'orphan=true',
-    'allowed_policies="default,logs.syslog.writer,metrics.http.writer,builds.queue.reader,environment.directory.bind"'
+    'allowed_policies="default,rabbitmq.creds.write.vhost.logs.syslog,secret.environment.directory.bind"'
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
@@ -33,10 +33,22 @@ Invoke-Vault `
     -arguments $createRole
 
 $createRole = @(
-    'auth/token/roles/metrics.dashboards',
+    'auth/token/roles/role.build.master',
     'period=1h',
     'orphan=true',
-    'allowed_policies="default,logs.syslog.writer,metrics.http.writer,environment.directory.bind"'
+    'allowed_policies="default,rabbitmq.creds.write.vhost.logs.syslog,secret.write.metrics.http,rabbitmq.creds.read.vhost.builds,secret.environment.directory.bind"'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
+
+$createRole = @(
+    'auth/token/roles/role.metrics.dashboards',
+    'period=1h',
+    'orphan=true',
+    'allowed_policies="default,rabbitmq.creds.write.vhost.logs.syslog,secret.write.metrics.http,secret.environment.directory.bind"'
 )
 Invoke-Vault `
     -vaultPath $vaultPath `

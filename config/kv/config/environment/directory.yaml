@@ -51,6 +51,12 @@ config:
   - key: config/environment/directory/query/groups/lookupbase
     value: DC=ad,Dc=example,DC=com
 
+  # The name of the group which will be used as administrators on Nexus
+  # Used by:
+  # - Nexus
+  - key: config/environment/directory/query/groups/artefacts/administrators
+    value: Admins
+
   # The name of the group which will be used as administrators on Jenkins
   # Used by:
   # - Jenkins
