@@ -1,9 +1,24 @@
-- roles:
-  - name: "rabbitmq/roles/write.vhost.logs.syslog"
-    policy: vhosts='{"vhost.logs":{"write":".*"}}'
+roles:
+  # System roles
+  - name: write.vhost.logs.syslog
+    file: write.vhost.logs.syslog.json
 
-  - name: "rabbitmq/roles/write.vhost.builds"
-    policy: vhosts='{"vhost.builds":{"write":".*"}}'
+  # TFS GIT push notifications
+  - name: readwrite.vhost.vcs.tfs.git.push
+    file: readwrite.vcs.tfs.git.push.json
+  - name: configure.vhost.vcs.tfs.git.push
+    file: configure.vcs.tfs.git.push.json
 
-  - name: "rabbitmq/roles/read.vhost.builds"
-    policy: vhosts='{"vhost.builds":{"read":".*"}}'
+  # Jenkins metrics notifications
+  - name: readwrite.vhost.metrics.build
+    file: readwrite.metrics.build.json
+  - name: configure.vhost.metrics.build
+    file: configure.metrics.build.json
+
+  # Jenkins builds
+  - name: read.vhost.build
+    file: read.build.json
+  - name: write.vhost.build
+    file: write.vhost.build
+  - name: configure.vhost.build
+    file: configure.vhost.build
