@@ -16,9 +16,9 @@ roles:
     file: configure.metrics.build.json
 
   # Jenkins builds
-  - name: read.vhost.build
-    file: read.build.json
-  - name: write.vhost.build
-    file: write.vhost.build
-  - name: configure.vhost.build
-    file: configure.vhost.build
+  - name: read.vhost.builds
+    file: read.builds.json
+  - name: write.vhost.builds
+    file: write.build.json
+  - name: configure.vhost.builds
+    file: configure.builds.json
