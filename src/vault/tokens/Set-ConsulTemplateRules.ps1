@@ -9,10 +9,22 @@ $ErrorActionPreference = 'Stop'
 . (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
 
 $createRole = @(
-    'auth/token/roles/role.system.logsandmetrics',
+    'auth/token/roles/role.system.syslogandmetrics',
     'period=1h',
     'orphan=true',
     'allowed_policies="default,rabbitmq.creds.write.vhost.logs.syslog,secret.write.metrics.http"'
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
+
+$createRole = @(
+    'auth/token/roles/role.system.filelogandmetrics',
+    'period=1h',
+    'orphan=true',
+    'allowed_policies="default,rabbitmq.creds.write.vhost.logs.file,secret.write.metrics.http"'
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
