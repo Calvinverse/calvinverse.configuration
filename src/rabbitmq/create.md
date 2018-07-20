@@ -21,7 +21,19 @@
   * Name: `syslog`
   * Durability: `Durable`
   * Auto delete: `no`
-
+* Create the `file` queue
+  * Name: `file`
+  * Durability: `Durable`
+  * Auto delete: `no`
+* Create the High Availability policy via the Admin UI
+  * Name: `ha-queue`
+  * Pattern: `.*`
+  * Apply to: `queues`
+  * Definition
+    * HA mode: `all`
+    * HA sync mode: `automatic`
+    * HA mirror promotion on shutdown: `always`
+    * HA mirror promotion on failure: `always`
 
 ## Builds
 
@@ -31,6 +43,15 @@
   * Name: `builds`
   * Durability: `Durable`
   * Auto delete: `no`
+* Create the High Availability policy via the Admin UI
+  * Name: `ha-queue`
+  * Pattern: `.*`
+  * Apply to: `queues`
+  * Definition
+    * HA mode: `all`
+    * HA sync mode: `automatic`
+    * HA mirror promotion on shutdown: `always`
+    * HA mirror promotion on failure: `always`
 
 ## Metrics
 
