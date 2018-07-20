@@ -2,23 +2,13 @@ roles:
   # System roles
   - name: write.vhost.logs.syslog
     file: write.vhost.logs.syslog.json
-
-  # TFS GIT push notifications
-  - name: readwrite.vhost.vcs.tfs.git.push
-    file: readwrite.vcs.tfs.git.push.json
-  - name: configure.vhost.vcs.tfs.git.push
-    file: configure.vcs.tfs.git.push.json
-
-  # Jenkins metrics notifications
-  - name: readwrite.vhost.metrics.build
-    file: readwrite.metrics.build.json
-  - name: configure.vhost.metrics.build
-    file: configure.metrics.build.json
+  - name: write.vhost.logs.file
+    file: write.vhost.logs.file.json
 
   # Jenkins builds
   - name: read.vhost.builds
     file: read.builds.json
   - name: write.vhost.builds
-    file: write.build.json
+    file: write.builds.json
   - name: configure.vhost.builds
     file: configure.builds.json
