@@ -25,6 +25,7 @@
   * Name: `file`
   * Durability: `Durable`
   * Auto delete: `no`
+* Update the `amq.topic` exchange by binding it to the `file` queue with the `file` topic
 * Create the High Availability policy via the Admin UI
   * Name: `ha-queue`
   * Pattern: `.*`
