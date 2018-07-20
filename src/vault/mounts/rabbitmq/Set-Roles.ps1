@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress
+    [string] $vaultServerAddress
 )
 
 $ErrorActionPreference = 'Stop'
@@ -46,7 +46,7 @@ try
                 $bytes = [System.Text.Encoding]::UTF8.GetBytes($role)
             }
 
-            $url = "$($serverAddress)/v1/rabbitmq/roles/$($name)"
+            $url = "$($vaultServerAddress)/v1/rabbitmq/roles/$($name)"
             Write-Output "Writing rabbit role with name: $($name) - role: $($role) to $($url) ... "
 
             $setRole = @(
@@ -55,7 +55,7 @@ try
             )
             Invoke-Vault `
                 -vaultPath $vaultPath `
-                -serverAddress $serverAddress `
+                -vaultServerAddress $vaultServerAddress `
                 -command 'write' `
                 -arguments $setRole
         }

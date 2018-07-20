@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string] $vaultPath,
-    [string] $serverAddress,
+    [string] $vaultServerAddress,
     [string] $consulDomain = 'consulverse',
     [string] $rabbitUser = 'user.vault',
     [string] $rabbitPassword = ''
@@ -16,7 +16,7 @@ $enableRabbitMq = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'secrets enable' `
     -arguments $enableRabbitMq
 
@@ -28,7 +28,7 @@ $configureRabbitMq = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $configureRabbitMq
 
@@ -39,6 +39,6 @@ $ttlRabbitMq = @(
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
-    -serverAddress $serverAddress `
+    -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $ttlRabbitMq
