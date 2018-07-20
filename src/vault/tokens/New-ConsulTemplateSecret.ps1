@@ -29,7 +29,7 @@ $json = ConvertFrom-Json -InputObject $singleLine
 
 # Write token for machine to consul kv
 # auth/services/templates/<MACHINE_NAME>/secrets
-$key = "auth/services/templates/$($machineName)/secrets"
+$key = "auth/services/templates/$($machineName.ToLowerInvariant())/secrets"
 $value = $json.wrap_info.token
 
 Write-Output "Writing k-v with key: $($key) - value: $($value) ... "
