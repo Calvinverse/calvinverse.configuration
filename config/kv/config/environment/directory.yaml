@@ -63,6 +63,12 @@ config:
   - key: config/environment/directory/query/groups/builds/administrators
     value: Admins
 
+  # The name of the group which will be used as build agents on Jenkins
+  # Used by:
+  # - Jenkins
+  - key: config/environment/directory/query/groups/builds/agent
+    value: Builders
+
   # The CN of the group which will be used as administrators on RabbitMQ
   # Used by:
   # - RabbitMQ
