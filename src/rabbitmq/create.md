@@ -38,8 +38,8 @@
 
 ## Builds
 
-* Create the `vhost.builds` vhost
-  * Name: `vhost.builds`
+* Create the `vhost.build.trigger` vhost
+  * Name: `vhost.build.trigger`
 * Create the `builds` queue
   * Name: `builds`
   * Durability: `Durable`
