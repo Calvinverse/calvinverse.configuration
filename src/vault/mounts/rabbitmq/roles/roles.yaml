@@ -6,9 +6,7 @@ roles:
     file: write.vhost.logs.file.json
 
   # Jenkins builds
-  - name: read.vhost.builds
-    file: read.builds.json
-  - name: write.vhost.builds
-    file: write.builds.json
-  - name: configure.vhost.builds
-    file: configure.builds.json
+  - name: readwrite.vhost.build.trigger
+    file: readwrite.vhost.build.trigger.json
+  - name: configure.vhost.build.trigger
+    file: configure.vhost.build.trigger.json
