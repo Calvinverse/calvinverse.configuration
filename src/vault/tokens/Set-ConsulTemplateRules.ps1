@@ -94,3 +94,17 @@ Invoke-Vault `
     -vaultServerAddress $vaultServerAddress `
     -command 'write' `
     -arguments $createRole
+
+$snmpMetricsRules = $defaultLinuxPolicies `
+    + ',secret.environment.infrastructure.snmp'
+$createRole = @(
+    'auth/token/roles/role.metrics.snmp',
+    'period=1h',
+    'orphan=true',
+    "allowed_policies=$snmpMetricsRules"
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
