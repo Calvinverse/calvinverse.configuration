@@ -54,7 +54,8 @@ Invoke-Vault `
 
 $masterBuildRules = $defaultLinuxPolicies `
     + ',rabbitmq.creds.readwrite.vhost.build.trigger' `
-    + ',secret.environment.directory.bind'
+    + ',secret.environment.directory.bind' `
+    + ',secret.projects.nbuildkit'
 $createRole = @(
     'auth/token/roles/role.build.master',
     'period=1h',
