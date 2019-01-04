@@ -2,12 +2,14 @@
 param(
     [string] $consulDatacenter = 'calvinverse-01',
     [string] $consulPort = '8500',
-    [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
+    [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' ),
+    [string] $configPath = $PSScriptRoot
 )
 
 Write-Verbose "Set-ConsulKV: param consulDatacenter = $consulDatacenter"
 Write-Verbose "Set-ConsulKV: param port = $consulPort"
 Write-Verbose "Set-ConsulKV: param serverIp = $consulServerAddress"
+Write-Verbose "Set-ConsulKV: param configPath = $configPath"
 
 $ErrorActionPreference = 'Stop'
 $commonParameterSwitches =
@@ -42,7 +44,7 @@ try
     $webClient = New-Object System.Net.WebClient
     try
     {
-        $kvFiles = Get-ChildItem -Path "$($PSScriptRoot)\*" -Recurse -Include *.yaml
+        $kvFiles = Get-ChildItem -Path "$($configPath)\*" -Recurse -Include *.yaml
         foreach($kvFile in $kvFiles)
         {
             Write-Output "Processing $($kvFile.FullName) ..."

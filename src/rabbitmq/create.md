@@ -21,16 +21,38 @@
   * Name: `syslog`
   * Durability: `Durable`
   * Auto delete: `no`
-
+* Create the `file` queue
+  * Name: `file`
+  * Durability: `Durable`
+  * Auto delete: `no`
+* Update the `amq.topic` exchange by binding it to the `file` queue with the `file` topic
+* Create the High Availability policy via the Admin UI
+  * Name: `ha-queue`
+  * Pattern: `.*`
+  * Apply to: `queues`
+  * Definition
+    * HA mode: `all`
+    * HA sync mode: `automatic`
+    * HA mirror promotion on shutdown: `always`
+    * HA mirror promotion on failure: `always`
 
 ## Builds
 
-* Create the `vhost.builds` vhost
-  * Name: `vhost.builds`
+* Create the `vhost.build.trigger` vhost
+  * Name: `vhost.build.trigger`
 * Create the `builds` queue
   * Name: `builds`
   * Durability: `Durable`
   * Auto delete: `no`
+* Create the High Availability policy via the Admin UI
+  * Name: `ha-queue`
+  * Pattern: `.*`
+  * Apply to: `queues`
+  * Definition
+    * HA mode: `all`
+    * HA sync mode: `automatic`
+    * HA mirror promotion on shutdown: `always`
+    * HA mirror promotion on failure: `always`
 
 ## Metrics
 

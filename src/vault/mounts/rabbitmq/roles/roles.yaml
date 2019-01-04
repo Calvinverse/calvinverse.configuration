@@ -1,9 +1,12 @@
-- roles:
-  - name: "rabbitmq/roles/write.vhost.logs.syslog"
-    policy: vhosts='{"vhost.logs":{"write":".*"}}'
+roles:
+  # System roles
+  - name: write.vhost.logs.syslog
+    file: write.vhost.logs.syslog.json
+  - name: write.vhost.logs.file
+    file: write.vhost.logs.file.json
 
-  - name: "rabbitmq/roles/write.vhost.builds"
-    policy: vhosts='{"vhost.builds":{"write":".*"}}'
-
-  - name: "rabbitmq/roles/read.vhost.builds"
-    policy: vhosts='{"vhost.builds":{"read":".*"}}'
+  # Jenkins builds
+  - name: readwrite.vhost.build.trigger
+    file: readwrite.vhost.build.trigger.json
+  - name: configure.vhost.build.trigger
+    file: configure.vhost.build.trigger.json
