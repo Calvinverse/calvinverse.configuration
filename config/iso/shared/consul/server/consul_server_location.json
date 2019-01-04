@@ -1,8 +1,9 @@
 {
     "retry_join": [
-      "192.168.2.11:8301",
-      "192.168.2.12:8301",
-      "192.168.2.13:8301",
-      "192.168.2.14:8301",
-      "192.168.2.15:8301"]
+      "hashiserver-1.infrastructure.ad.calvinverse.net:8301",
+      "hashiserver-2.infrastructure.ad.calvinverse.net:8301",
+      "hashiserver-3.infrastructure.ad.calvinverse.net:8301",
+      "hashiserver-4.infrastructure.ad.calvinverse.net:8301",
+      "hashiserver-5.infrastructure.ad.calvinverse.net:8301"
+    ]
   }
