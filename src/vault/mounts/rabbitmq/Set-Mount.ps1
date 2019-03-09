@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $vaultPath,
+    [string] $vaultPath = 'vault',
     [string] $vaultServerAddress,
     [string] $consulDomain = 'consulverse',
     [string] $rabbitUser = 'user.vault',

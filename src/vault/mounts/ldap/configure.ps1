@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $vaultPath,
+    [string] $vaultPath = 'vault',
     [string] $vaultServerAddress,
     [string] $ldapServerNameOrIp,
     [string] $userDn = 'OU=People,OU=Calvinverse Users,DC=ad,DC=calvinverse,DC=net',

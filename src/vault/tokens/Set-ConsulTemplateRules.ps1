@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $vaultPath,
+    [string] $vaultPath = 'vault',
     [string] $vaultServerAddress
 )
 
@@ -12,7 +12,7 @@ $defaultLinuxPolicies = 'default' `
     + ',rabbitmq.creds.write.vhost.logs.syslog' `
     + ',secret.write.metrics.http'
 $createRole = @(
-    'auth/token/roles/role.system.syslogandmetrics',
+    'auth/token/roles/role.system.linux',
     'period=1h',
     'orphan=true',
     "allowed_policies=$defaultLinuxPolicies"
@@ -27,7 +27,7 @@ $defaultWindowsPolicies = 'default' `
     + ',rabbitmq.creds.write.vhost.logs.file' `
     + ',secret.write.metrics.http'
 $createRole = @(
-    'auth/token/roles/role.system.filelogandmetrics',
+    'auth/token/roles/role.system.windows',
     'period=1h',
     'orphan=true',
     "allowed_policies=$defaultWindowsPolicies"
