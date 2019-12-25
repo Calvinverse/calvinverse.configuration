@@ -1,10 +1,24 @@
 [CmdletBinding()]
 param(
-    [string] $vaultPath,
+    [string] $vaultPath = 'vault',
+
     [string] $vaultServerAddress,
-    [string] $role = 'role.system.logsandmetrics', # other options are role.build.master, role.metrics.dashboards
+
+    [ValidateSet(
+        'role.system.linux',
+        'role.system.windows',
+        'role.artefacts.http',
+        'role.build.agent.windows',
+        'role.build.master',
+        'role.metrics.dashboards',
+        'role.metrics.snmp'
+    )]
+    [string] $role = 'role.system.linux',
+
     [string] $machineName,
+
     [string] $consulPort = '8500',
+
     [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
 )
 
@@ -14,7 +28,7 @@ $ErrorActionPreference = 'Stop'
 
 $createToken = @(
     '-force',
-    '-wrap-ttl=30m',
+    '-wrap-ttl=5m',
     '-format=json',
     "auth/token/create/$($role)"
 )
@@ -29,7 +43,7 @@ $json = ConvertFrom-Json -InputObject $singleLine
 
 # Write token for machine to consul kv
 # auth/services/templates/<MACHINE_NAME>/secrets
-$key = "auth/services/templates/$($machineName)/secrets"
+$key = "auth/services/templates/$($machineName.ToLowerInvariant())/secrets"
 $value = $json.wrap_info.token
 
 Write-Output "Writing k-v with key: $($key) - value: $($value) ... "
