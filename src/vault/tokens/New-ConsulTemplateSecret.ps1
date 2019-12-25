@@ -1,10 +1,24 @@
 [CmdletBinding()]
 param(
-    [string] $vaultPath,
+    [string] $vaultPath = 'vault',
+
     [string] $vaultServerAddress,
-    [string] $role = 'role.system.syslogandmetrics', # other options are role.system.filelogandmetrics, role.build.master, role.metrics.dashboards, role.metrics.snmp
+
+    [ValidateSet(
+        'role.system.linux',
+        'role.system.windows',
+        'role.artefacts.http',
+        'role.build.agent.windows',
+        'role.build.master',
+        'role.metrics.dashboards',
+        'role.metrics.snmp'
+    )]
+    [string] $role = 'role.system.linux',
+
     [string] $machineName,
+
     [string] $consulPort = '8500',
+
     [string] $consulServerAddress = $( throw 'Please specify the IP address for the consul server' )
 )
 
