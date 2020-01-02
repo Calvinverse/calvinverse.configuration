@@ -8,9 +8,10 @@ $ErrorActionPreference = 'Stop'
 
 . (Join-Path (Split-Path $PSScriptRoot -Parent) 'helpers.ps1')
 
+# Linux - Default
 $defaultLinuxPolicies = 'default' `
-    + ',rabbitmq.creds.write.vhost.logs.syslog' `
-    + ',secret.write.metrics.http'
+    + ',secret.services.metrics.users.write' `
+    + ',secret.services.queue.users.logs.syslog'
 $createRole = @(
     'auth/token/roles/role.system.linux',
     'period=1h',
@@ -23,21 +24,7 @@ Invoke-Vault `
     -command 'write' `
     -arguments $createRole
 
-$defaultWindowsPolicies = 'default' `
-    + ',rabbitmq.creds.write.vhost.logs.file' `
-    + ',secret.write.metrics.http'
-$createRole = @(
-    'auth/token/roles/role.system.windows',
-    'period=1h',
-    'orphan=true',
-    "allowed_policies=$defaultWindowsPolicies"
-)
-Invoke-Vault `
-    -vaultPath $vaultPath `
-    -vaultServerAddress $vaultServerAddress `
-    -command 'write' `
-    -arguments $createRole
-
+# Linux - Nexus artefacts
 $httpArtefactRules = $defaultLinuxPolicies `
     + ',secret.environment.directory.bind'
 $createRole = @(
@@ -52,6 +39,7 @@ Invoke-Vault `
     -command 'write' `
     -arguments $createRole
 
+# Linux - Jenkins controller
 $masterBuildRules = $defaultLinuxPolicies `
     + ',rabbitmq.creds.readwrite.vhost.build.trigger' `
     + ',secret.environment.directory.bind' `
@@ -68,20 +56,7 @@ Invoke-Vault `
     -command 'write' `
     -arguments $createRole
 
-$windowsBuildAgentRules = $defaultWindowsPolicies `
-    + ',secret.environment.directory.users.build.agent'
-$createRole = @(
-    'auth/token/roles/role.build.agent.windows',
-    'period=1h',
-    'orphan=true',
-    "allowed_policies=$windowsBuildAgentRules"
-)
-Invoke-Vault `
-    -vaultPath $vaultPath `
-    -vaultServerAddress $vaultServerAddress `
-    -command 'write' `
-    -arguments $createRole
-
+# Linux - Grafana
 $dashboardMetricsRules = $defaultLinuxPolicies `
     + ',secret.environment.directory.bind'
 $createRole = @(
@@ -96,6 +71,7 @@ Invoke-Vault `
     -command 'write' `
     -arguments $createRole
 
+# Linux - SNMP trap
 $snmpMetricsRules = $defaultLinuxPolicies `
     + ',secret.environment.infrastructure.snmp'
 $createRole = @(
@@ -103,6 +79,38 @@ $createRole = @(
     'period=1h',
     'orphan=true',
     "allowed_policies=$snmpMetricsRules"
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
+
+# Windows - Default
+$defaultWindowsPolicies = 'default' `
+    + ',secret.services.metrics.users.write' `
+    + ',secret.services.queue.users.logs.eventlog' `
+    + ',secret.services.queue.users.logs.filelog'
+$createRole = @(
+    'auth/token/roles/role.system.windows',
+    'period=1h',
+    'orphan=true',
+    "allowed_policies=$defaultWindowsPolicies"
+)
+Invoke-Vault `
+    -vaultPath $vaultPath `
+    -vaultServerAddress $vaultServerAddress `
+    -command 'write' `
+    -arguments $createRole
+
+# Windows - Build agent
+$windowsBuildAgentRules = $defaultWindowsPolicies `
+    + ',secret.environment.directory.users.build.agent'
+$createRole = @(
+    'auth/token/roles/role.build.agent.windows',
+    'period=1h',
+    'orphan=true',
+    "allowed_policies=$windowsBuildAgentRules"
 )
 Invoke-Vault `
     -vaultPath $vaultPath `
