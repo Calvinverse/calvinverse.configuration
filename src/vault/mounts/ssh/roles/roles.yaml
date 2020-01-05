@@ -1,0 +1,10 @@
+roles:
+  # Client roles
+  - name: ssh.client.linux.admin
+    category: client
+    file: ssh.client.linux.admin.json
+
+  # host roles
+  - name: ssh.host.linux
+    category: host
+    file: ssh.host.linux.json
