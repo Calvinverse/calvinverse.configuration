@@ -1,0 +1,11 @@
+    {
+        "allow_localhost": false,
+        "client_flag": false,
+        "key_usage": [
+            "DigitalSignature",
+            "KeyAgreement"
+        ],
+        "max_ttl": "43800h",
+        "server_flag": true,
+        "ttl": "8760h"
+    }
