@@ -10,6 +10,7 @@ $ErrorActionPreference = 'Stop'
 
 # Linux - Default
 $defaultLinuxPolicies = 'default' `
+    + ',ssh-host.sign.ssh.host.linux' `
     + ',secret.services.metrics.users.write' `
     + ',secret.services.queue.users.logs.syslog'
 $createRole = @(
