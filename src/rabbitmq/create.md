@@ -21,11 +21,16 @@
   * Name: `syslog`
   * Durability: `Durable`
   * Auto delete: `no`
-* Create the `file` queue
-  * Name: `file`
+* Create the `filelog` queue
+  * Name: `filelog`
   * Durability: `Durable`
   * Auto delete: `no`
-* Update the `amq.topic` exchange by binding it to the `file` queue with the `file` topic
+* Create the `eventlog` queue
+  * Name: `eventlog`
+  * Durability: `Durable`
+  * Auto delete: `no`
+* Update the `amq.topic` exchange by binding it to the `filelog` queue with the `filelog` topic
+* Update the `amq.topic` exchange by binding it to the `eventlog` queue with the `eventlog` topic
 * Create the High Availability policy via the Admin UI
   * Name: `ha-queue`
   * Pattern: `.*`
@@ -35,6 +40,13 @@
     * HA sync mode: `automatic`
     * HA mirror promotion on shutdown: `always`
     * HA mirror promotion on failure: `always`
+* Create the users for the different queues
+  * User name: `user.vhost.logs`
+  * Password: create one ...
+* Grant `user.health` user access to the `vhost.health` vhost
+  * read: '.*'
+  * write: '.*'
+  * configure: '.*'
 
 ## Builds
 

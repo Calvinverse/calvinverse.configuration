@@ -1,0 +1,7 @@
+roles:
+  # SSH roles
+  - name: create.certificate.ssh.client
+    file: create.certificate.ssh.client.json
+  - name: create.certificate.ssh.host
+    file: create.certificate.ssh.host.json
+
