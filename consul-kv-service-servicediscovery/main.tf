@@ -1,7 +1,7 @@
 resource "consul_key_prefix" "consul-kv-service-servicediscovery" {
   token      = var.consul_acl_token
 
-  path_prefix = "config/services/consul"
+  path_prefix = "config/services/consul/"
 
   subkeys = {
     "datacenter"  = var.consul_datacenter
