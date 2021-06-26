@@ -2,7 +2,7 @@ locals {
   kv_prefix = "config/services/consul"
 }
 
-resource "consul_key" "servicediscovery-datacenter" {
+resource "consul_keys" "servicediscovery-datacenter" {
   token      = var.consul_acl_token
 
   key {
@@ -11,7 +11,7 @@ resource "consul_key" "servicediscovery-datacenter" {
   }
 }
 
-resource "consul_key" "servicediscovery-domain" {
+resource "consul_keys" "servicediscovery-domain" {
   token      = var.consul_acl_token
 
   key {
@@ -20,7 +20,7 @@ resource "consul_key" "servicediscovery-domain" {
   }
 }
 
-resource "consul_key" "servicediscovery-statsd-rules" {
+resource "consul_keys" "servicediscovery-statsd-rules" {
   token      = var.consul_acl_token
 
   key {

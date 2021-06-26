@@ -2,7 +2,7 @@ locals {
   kv_prefix = "config/services/proxy.edge"
 }
 
-resource "consul_key" "proxy-ui-color" {
+resource "consul_keys" "proxy-ui-color" {
   token      = var.consul_acl_token
 
   key {
@@ -11,7 +11,7 @@ resource "consul_key" "proxy-ui-color" {
   }
 }
 
-resource "consul_key" "proxy-ui-title" {
+resource "consul_keys" "proxy-ui-title" {
   token      = var.consul_acl_token
 
   key {
@@ -20,7 +20,7 @@ resource "consul_key" "proxy-ui-title" {
   }
 }
 
-resource "consul_key" "proxy-ui-title" {
+resource "consul_keys" "proxy-ui-title" {
   token      = var.consul_acl_token
 
   key {
