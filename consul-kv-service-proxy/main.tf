@@ -20,7 +20,7 @@ resource "consul_keys" "proxy-ui-title" {
   }
 }
 
-resource "consul_keys" "proxy-ui-title" {
+resource "consul_keys" "proxy-statsd-rules" {
   token      = var.consul_acl_token
 
   key {
