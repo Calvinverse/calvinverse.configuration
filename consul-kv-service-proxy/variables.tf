@@ -33,6 +33,5 @@ variable "proxy_ui_color" {
 
 variable "proxy_ui_title" {
   description = "The title of the proxy UI."
-  default     = var.consul_datacenter
   type        = string
 }
