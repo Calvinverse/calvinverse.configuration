@@ -4,3 +4,5 @@ build/configurations/
 build/deploy/
 build/logs/
 build/temp/
+consul-kv-service-servicediscovery/.terraform/
+consul-kv-service-servicediscovery/.terraform.lock.hcl
