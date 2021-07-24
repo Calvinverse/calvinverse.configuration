@@ -23,7 +23,7 @@ variable "consul_server_port" {
 }
 
 #
-# PROXY
+# SECRETS
 #
 
 variable "secrets_protocols_http_hostname" {
