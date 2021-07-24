@@ -24,7 +24,7 @@ resource "consul_keys" "proxy-statsd-rules" {
   token      = var.consul_acl_token
 
   key {
-    path = "${local.kv_prefix}/statsd/rules"
+    path = "${local.kv_prefix}/metrics/statsd/rules"
     value = filebase64("${path.module}/statsd_rules.txt")
   }
 }
